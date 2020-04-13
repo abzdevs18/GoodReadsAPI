@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%=title%></title>
+</head>
+
+<body>
+  <ul>
+    <% for(let i = 0; i < nav.length; i++){%>
+    <a href="<%=nav[i].link%>"><%=nav[i].title%></a>
+    <%}%>
+  </ul>
+  <ul>
+        <li><%=book['title']%></li>
+        <p><%=book['author']%></p>
+        <span><%=book['genre']%></span>
+        <hr>
+  </ul>
+</body>
+
+</html>
