@@ -18,7 +18,7 @@
         <li><%=books[i].title%></li>
         <p><%=books[i].author%></p>
         <span><%=books[i].genre%></span>
-        <a href="/book/<%=i%>">Read more...</a>
+        <a href="/book/<%=books[i]._id%>">Read more...</a>
         <hr>
         <%}%>
   </ul>

@@ -13,11 +13,11 @@
     <a href="<%=nav[i].link%>"><%=nav[i].title%></a>
     <%}%>
 
-    <form action="/auth/signup" method="post">
-      <h1>Sign Up <a href="/auth/signin">Sign In</a></h1>
+    <form action="/auth/signin" method="post">
+      <h1>Login</h1>
       <input type="text" name="username" id="uName">
       <input type="text" name="password" id="uPass">
-      <input type="submit" value="Sign Up">
+      <input type="submit" value="Sign In">
     </form>
   </ul>
 </body>

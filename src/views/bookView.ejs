@@ -13,12 +13,13 @@
     <a href="<%=nav[i].link%>"><%=nav[i].title%></a>
     <%}%>
   </ul>
-  <ul>
-        <li><%=book['title']%></li>
-        <p><%=book['author']%></p>
-        <span><%=book['genre']%></span>
+  <div>
+        <img src="<%=book.details.image_url%>" alt="" srcset="">
+        <p><%=book.author%></p>
+        <span><%=book.genre%></span>
+        <%-book.details.description%>
         <hr>
-  </ul>
+  </div>
 </body>
 
 </html>

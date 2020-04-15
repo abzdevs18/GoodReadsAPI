@@ -5,31 +5,29 @@ let morgan = require('morgan');
 let path = require('path');
 const sql = require('mssql');
 
-const config = {
-    server: "splibrary.database.windows.net", // Use your SQL server name
-    database: "spLibrary", // Database to connect to
-    user: "debian", // Use your username
-    password: "D3b1an!?", // Use your password
-    port: 1433,
-    // Since we're on Windows Azure, we need to set the following options
-    options: {
-          encrypt: true
-      }
-   };
-
-sql.connect(config).catch(err => {
-    debug(err);
-});
+const bodyParser = require('body-parser');
+let cookieParser = require('cookie-parser');
+let session = require('express-session');
+let passport = require('passport');
 
 let nav = [
     { link: '/book', title: 'Books' },
     { link: '/blog', title: 'Blogs' }
 ];
 let bookRouter = require('./src/routes/bookRoute')(nav);
+let adminRoute = require('./src/routes/adminRoute')(nav);
+let authRoute = require('./src/routes/authRoute')(nav);
 
 let app = express();
 
 app.use(morgan('tiny'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(cookieParser());
+app.use(session({secret:"D3b1an!?"}));
+
+require('./src/config/passport')(app);
+
 app.use(express.static(path.join(__dirname, '/public/')));
 
 app.use('/css', express.static(path.join(__dirname, '/node_modules/bootstrap/dist/css')));
@@ -41,7 +39,8 @@ app.set('views', './src/views');
 app.set('view engine', 'ejs');
 
 app.use('/book', bookRouter);
-
+app.use('/admin', adminRoute);
+app.use('/auth', authRoute);
 app.get('/', function (req, res) {
     res.render('index', {
         nav,
